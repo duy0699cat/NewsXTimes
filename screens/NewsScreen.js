@@ -6,9 +6,9 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import Card from '../../components/Card';
-import {getNewsFromAPI} from '../../apis/News';
-import themeContext from '../../config/themeContext';
+import Card from '../components/Card';
+import {getNewsFromAPI} from '../apis/News';
+import themeContext from '../config/themeContext';
 
 const NewsScreen = ({route}) => {
   const {country, category} = route.params;

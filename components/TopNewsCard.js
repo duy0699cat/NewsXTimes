@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Ionicons} from '@react-native-vector-icons/ionicons';
+import Ionicons from '@react-native-vector-icons/ionicons';
 //import {useTheme} from '@react-navigation/native';
 import React, {useContext, useState} from 'react';
 import {

@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import themeContext from '../config/themeContext';
 import WebView from 'react-native-webview';
-import {Ionicons} from '@react-native-vector-icons/ionicons';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 const {width, height} = Dimensions.get('window');
 

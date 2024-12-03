@@ -9,7 +9,7 @@ import {
 
 import { EventRegister } from 'react-native-event-listeners';
 import themeContext from '../config/themeContext';
-import {Ionicons} from '@react-native-vector-icons/ionicons';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 export default function CustomDrawerContent(props) {
 

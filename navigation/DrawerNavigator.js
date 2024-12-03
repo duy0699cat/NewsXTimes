@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import { Switch } from 'react-native';
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 
-import {Ionicons} from '@react-native-vector-icons/ionicons';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { EventRegister } from 'react-native-event-listeners';

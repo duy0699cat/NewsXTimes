@@ -17,9 +17,9 @@ import newAPI from '../apis/News';
 import Card from '../components/Card';
 import TrendNews from '../screens/TrendNews';
 
-import {EventRegister} from 'react-native-event-listeners';
+//import {EventRegister} from 'react-native-event-listeners';
 import themeContext from '../config/themeContext';
-
+import { NEWS_API_KEY } from '@env';
 //API call
 const Home = ({navigation}) => {
   const [isLoading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ const Home = ({navigation}) => {
 
   function getNewsFromAPI() {
     newAPI
-      .get('top-headlines?country=us&apiKey=920deb9f754348c0bec4871fef36d971')
+      .get(`top-headlines?country=us&apiKey=${NEWS_API_KEY}`)
       .then(async function (response) {
         setNews(response.data);
       })
