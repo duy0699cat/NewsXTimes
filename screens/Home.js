@@ -4,57 +4,46 @@ import {
   View,
   StyleSheet,
   ActivityIndicator,
-  Switch,
   Text,
   FlatList,
-  ScrollView,
   StatusBar,
   Image,
   TouchableOpacity,
 } from 'react-native';
 
-import newAPI from '../apis/News';
+import {getNewsFromAPI} from '../apis/News';
 import Card from '../components/Card';
 import TrendNews from '../screens/TrendNews';
 
-//import {EventRegister} from 'react-native-event-listeners';
 import themeContext from '../config/themeContext';
-import { NEWS_API_KEY } from '@env';
+
 //API call
 const Home = ({navigation}) => {
   const [isLoading, setLoading] = useState(true);
   const [news, setNews] = useState([]);
+  //Theme
+  const theme = useContext(themeContext);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
-    getNewsFromAPI();
-  }, []);
-
-  /* const newsResponse = async() => {
-      const response = await newAPI.get('everything?q=tesla&from=2021-07-19&sortBy=publishedAt&apiKey=920deb9f754348c0bec4871fef36d971')
-      console.log(response.data)
-  } */
-
-  function getNewsFromAPI() {
-    newAPI
-      .get(`top-headlines?country=us&apiKey=${NEWS_API_KEY}`)
-      .then(async function (response) {
+    const fetchNews = async () => {
+      try {
+        console.log('Fetching recent news');
+        const response = await getNewsFromAPI('country=us');
         setNews(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
+      } catch (error) {
+        console.error(error);
+      } finally {
         setLoading(false);
-      });
-  }
+      }
+    };
+
+    fetchNews();
+  }, []);
 
   if (!news) {
     return null;
   }
-
-  //Theme
-  const theme = useContext(themeContext);
-  const [isEnabled, setIsEnabled] = useState(false);
 
   //Dates
   var date = new Date().getDate();

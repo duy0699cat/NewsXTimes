@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import Ionicons from '@react-native-vector-icons/ionicons';
-//import {useTheme} from '@react-navigation/native';
+import {formatDate} from '../utils/formatter';
 import React, {useContext, useState} from 'react';
 import {
   Modal,
@@ -41,11 +41,11 @@ function Card({item, onPress}) {
       <TouchableNativeFeedback onPress={() => setModalVisible(!modalVisible)}>
         <View
           style={{
-            margin: 20,
+            margin: 15,
             borderRadius: 15,
             backgroundColor: theme.cardBackground,
             width: 200,
-            height: 200,
+            height: 220,
             overflow: 'hidden',
             elevation: 3,
           }}>
@@ -80,11 +80,11 @@ function Card({item, onPress}) {
                 marginLeft: 10,
                 marginTop: 5,
               }}>
-              <Text style={styles.cardText}>🕘 {item.publishedAt}</Text>
+              <Text style={styles.cardText}>
+                🕘 {formatDate(item.publishedAt)}
+              </Text>
             </View>
-            <TouchableOpacity
-              style={styles.shareButton}
-              onPress={handleShare}>
+            <TouchableOpacity style={styles.shareButton} onPress={handleShare}>
               <Ionicons name="share-social" color={theme.textColor} size={20} />
             </TouchableOpacity>
           </View>

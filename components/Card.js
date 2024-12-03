@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {useTheme} from '@react-navigation/native';
+import {formatDate} from '../utils/formatter';
 import React, {useContext, useState} from 'react';
 import {
   View,
@@ -83,7 +84,7 @@ function Card({item, onPress}) {
                   fontSize: 10,
                   color: 'white',
                 }}>
-                🕘 {item.publishedAt}
+                🕘 {formatDate(item.publishedAt)}
               </Text>
             </View>
             <TouchableOpacity

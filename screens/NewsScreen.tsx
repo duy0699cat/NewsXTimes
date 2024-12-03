@@ -1,19 +1,29 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import {View, FlatList, ActivityIndicator} from 'react-native';
 import Card from '../components/Card';
 import {getNewsFromAPI} from '../apis/News';
 import themeContext from '../config/themeContext';
+import {RouteProp} from '@react-navigation/native';
+import {NewsResponse} from '../types/api';
+// Define types for typescript
+// This defines what parameters your screen accepts
+type NewsScreenParams = {
+  country: string;
+  category: string;
+};
+// This creates a 'route' type for your screen
+type NewsScreenRouteProp = RouteProp<
+  {
+    News: NewsScreenParams; // First 'News' - Key in ParamList
+  },
+  'News' // Second 'News' - Screen name
+>;
 
-const NewsScreen = ({route}) => {
+const NewsScreen = ({route}: {route: NewsScreenRouteProp}) => {
   const {country, category} = route.params;
   const [isLoading, setLoading] = useState(true);
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState<NewsResponse | null>(null);
+  const theme = useContext(themeContext);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -34,7 +44,6 @@ const NewsScreen = ({route}) => {
   if (!news) {
     return null;
   }
-  const theme = useContext(themeContext);
 
   return (
     <View style={{backgroundColor: theme.backColor}}>
@@ -42,29 +51,14 @@ const NewsScreen = ({route}) => {
         <ActivityIndicator size="large" color="#DA3349" />
       ) : (
         <FlatList
-          data={news.articles}
+          data={news?.articles}
           keyExtractor={(item, index) => 'key' + index}
-          renderItem={({item}) => <Card item={item} />}
+          renderItem={({item}) => <Card item={item} onPress={undefined} />}
           nestedScrollEnabled={true}
         />
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  midText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginLeft: 20,
-  },
-  header: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginLeft: 20,
-  },
-});
 
 export default NewsScreen;

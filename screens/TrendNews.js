@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, FlatList, View, ActivityIndicator} from 'react-native';
+import {FlatList, View, ActivityIndicator} from 'react-native';
 
 import TopNewsCard from '../components/TopNewsCard';
 import { getNewsFromAPI } from '../apis/News';
