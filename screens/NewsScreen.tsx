@@ -1,23 +1,13 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
+
 import Card from '../components/Card';
 import {getNewsFromAPI} from '../apis/News';
 import themeContext from '../config/themeContext';
-import {RouteProp} from '@react-navigation/native';
 import {NewsResponse} from '../types/api';
-// Define types for typescript
-// This defines what parameters your screen accepts
-type NewsScreenParams = {
-  country: string;
-  category: string;
-};
-// This creates a 'route' type for your screen
-type NewsScreenRouteProp = RouteProp<
-  {
-    News: NewsScreenParams; // First 'News' - Key in ParamList
-  },
-  'News' // Second 'News' - Screen name
->;
+import {NewsScreenRouteProp} from '../types/screens';
+
+
 
 const NewsScreen = ({route}: {route: NewsScreenRouteProp}) => {
   const {country, category} = route.params;

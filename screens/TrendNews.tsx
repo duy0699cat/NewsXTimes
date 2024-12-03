@@ -2,11 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, View, ActivityIndicator} from 'react-native';
 
 import TopNewsCard from '../components/TopNewsCard';
-import { getNewsFromAPI } from '../apis/News';
+import {getNewsFromAPI} from '../apis/News';
+import {NewsResponse} from '../types/api';
 
-const TrendNews = ({navigation}) => {
+const TrendNews = (
+  {
+    /* navigation */
+  },
+) => {
   const [isLoading, setLoading] = useState(true);
-  const [newstech, setNewsTech] = useState([]);
+  const [newstech, setNewsTech] = useState<NewsResponse | null>(null);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -31,12 +36,12 @@ const TrendNews = ({navigation}) => {
   return (
     <View>
       {isLoading ? (
-        <ActivityIndicator visible={true} />
+        <ActivityIndicator size="large" color="#DA3349" />
       ) : (
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={newstech.articles}
+          data={newstech?.articles}
           keyExtractor={(item, index) => 'key' + index}
           renderItem={({item}) => <TopNewsCard item={item} />}
         />

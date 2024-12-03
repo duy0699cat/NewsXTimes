@@ -13,17 +13,23 @@ import {
 
 import {getNewsFromAPI} from '../apis/News';
 import Card from '../components/Card';
-import TrendNews from '../screens/TrendNews';
+import TrendNews from './TrendNews';
 
 import themeContext from '../config/themeContext';
+import NewsResponse from '../types/api';
+import {HomeScreenNavigationProp} from '../types/screens';
+
+interface HomeProps {
+  navigation: HomeScreenNavigationProp;
+}
 
 //API call
-const Home = ({navigation}) => {
+const Home: React.FC<HomeProps> = ({navigation}) => {
   const [isLoading, setLoading] = useState(true);
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState<NewsResponse | null>(null);
   //Theme
   const theme = useContext(themeContext);
-  const [isEnabled, setIsEnabled] = useState(false);
+  //const [isEnabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
     const fetchNews = async () => {
