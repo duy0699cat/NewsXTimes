@@ -1,30 +1,28 @@
 /* eslint-disable react-native/no-inline-styles */
-import Ionicons from '@react-native-vector-icons/ionicons';
 import {formatDate} from '../utils/formatter';
 import React, {useContext, useState} from 'react';
 import {
-  Modal,
-  TouchableOpacity,
-  Share,
-  Button,
   View,
+  Modal,
+  Button,
   StyleSheet,
   Image,
   Dimensions,
-  // Linking,
   Text,
+  Share,
   TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
-import WebView from 'react-native-webview';
-
 import themeContext from '../config/themeContext';
+import WebView from 'react-native-webview';
+import Ionicons from '@react-native-vector-icons/ionicons';
+import {CardProps} from '../types/screens';
+//types
 
 const {width, height} = Dimensions.get('window');
 
-function Card({item, onPress}) {
+const Card: React.FC<CardProps> = ({item /*, onPress8*/}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const theme = useContext(themeContext);
-  //onPress={() => Linking.openURL(item.url)} >
 
   //handleShare
   const handleShare = () => {
@@ -36,16 +34,16 @@ function Card({item, onPress}) {
     );
   };
 
+  const theme = useContext(themeContext);
   return (
     <View>
       <TouchableNativeFeedback onPress={() => setModalVisible(!modalVisible)}>
         <View
           style={{
-            margin: 15,
+            margin: 20,
             borderRadius: 15,
             backgroundColor: theme.cardBackground,
-            width: 200,
-            height: 220,
+            height: 290,
             overflow: 'hidden',
             elevation: 3,
           }}>
@@ -55,17 +53,19 @@ function Card({item, onPress}) {
               width: width,
               marginHorizontal: width * 0.03,
               marginVertical: width * 0.03,
-              fontSize: 15,
+              fontSize: 20,
               fontWeight: 'bold',
               color: theme.textColor,
-              maxWidth: width * 0.45,
+              maxWidth: width * 0.85,
             }}
             numberOfLines={2}>
-            {item.title ? item.title : 'Not Available'}
+            {item.title}
           </Text>
           <Text style={styles.author}>
-            {' '}
             {item.author ? item.author : 'Not Available'}
+          </Text>
+          <Text style={styles.desc} numberOfLines={2}>
+            {item.description}
           </Text>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View
@@ -74,17 +74,26 @@ function Card({item, onPress}) {
                 borderRadius: 15,
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 130,
+                width: 140,
                 padding: 2,
                 elevation: 3,
                 marginLeft: 10,
                 marginTop: 5,
               }}>
-              <Text style={styles.cardText}>
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: 'white',
+                }}>
                 🕘 {formatDate(item.publishedAt)}
               </Text>
             </View>
-            <TouchableOpacity style={styles.shareButton} onPress={handleShare}>
+            <TouchableOpacity
+              style={{
+                justifyContent: 'center',
+                marginRight: 10,
+              }}
+              onPress={handleShare}>
               <Ionicons name="share-social" color={theme.textColor} size={20} />
             </TouchableOpacity>
           </View>
@@ -121,29 +130,25 @@ function Card({item, onPress}) {
       </Modal>
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
-  cardText: {
-    fontSize: 10,
-    color: 'white',
-  },
-  shareButton: {
-    justifyContent: 'center',
-    marginRight: 10,
-  },
   image: {
-    width: 200,
-    height: 100,
+    width: width,
+    height: height * 0.15,
   },
   author: {
     width: width,
     marginTop: -10,
     marginHorizontal: width * 0.03,
     color: 'darkgray',
-    maxWidth: width * 0.4,
+  },
+  desc: {
+    width: width,
+    marginTop: 5,
+    marginHorizontal: width * 0.03,
+    color: 'gray',
+    maxWidth: width * 0.8,
   },
 });
 
 export default Card;
-
-//cardBackground

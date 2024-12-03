@@ -7,27 +7,34 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import themeContext from '../config/themeContext';
+import {RoundCardProps} from '../types/screens';
 
-const {width, height} = Dimensions.get('window');
+const {width /* , height */} = Dimensions.get('window');
 
-function Card({onPress, image, navigation}) {
+const Card: React.FC<RoundCardProps> = ({
+  onPress,
+  image /* , navigation */,
+}) => {
   const theme = useContext(themeContext);
   return (
     <TouchableNativeFeedback onPress={onPress}>
-      <View
-        style={{
-          borderRadius: 30,
-          backgroundColor: theme.cardBackground,
-          height: 60,
-          width: 60,
-        }}>
+      <View style={[styles.container, {backgroundColor: theme.cardBackground}]}>
         <Image source={image} style={styles.imageDim} />
       </View>
     </TouchableNativeFeedback>
   );
-}
+};
+
 const styles = StyleSheet.create({
-  imageDim: {width: 60, height: 60},
+  container: {
+    borderRadius: 30,
+    height: 60,
+    width: 60,
+  },
+  imageDim: {
+    width: 60,
+    height: 60,
+  },
   author: {
     width: width,
     marginTop: -10,
