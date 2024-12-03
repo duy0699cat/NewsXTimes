@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Switch } from 'react-native';
+// import { Switch } from 'react-native';
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 
 import {Ionicons} from '@react-native-vector-icons/ionicons';
@@ -12,7 +12,7 @@ import themeContext from '../config/themeContext';
 import TabNavigator from './TabNavigator';
 
 import DrawerContent from './DrawerContent';
-import NewsScreen from '../screens/Country/NewsScreen';
+import NewsScreen from '../screens/NewsScreen';
 
 const Drawer = createDrawerNavigator();
 

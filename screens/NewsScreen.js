@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {useEffect, useState, useContext} from 'react';
 import {
   View,
   StyleSheet,
   Text,
   FlatList,
   ActivityIndicator,
-} from "react-native";
-import Card from "../../components/Card";
-import { getNewsFromAPI } from "../../apis/News";
-import themeContext from "../../config/themeContext";
+} from 'react-native';
+import Card from '../../components/Card';
+import {getNewsFromAPI} from '../../apis/News';
+import themeContext from '../../config/themeContext';
 
-const NewsScreen = ({ route }) => {
-  const { country, category } = route.params;
+const NewsScreen = ({route}) => {
+  const {country, category} = route.params;
   const [isLoading, setLoading] = useState(true);
   const [news, setNews] = useState([]);
 
@@ -19,7 +19,7 @@ const NewsScreen = ({ route }) => {
     const fetchNews = async () => {
       try {
         const response = await getNewsFromAPI(
-          `country=${country}&category=${category}`
+          `country=${country}&category=${category}`,
         );
         setNews(response.data);
       } catch (error) {
@@ -30,21 +30,21 @@ const NewsScreen = ({ route }) => {
     };
 
     fetchNews();
-  }, []);
+  }, [category, country]);
   if (!news) {
     return null;
   }
   const theme = useContext(themeContext);
 
   return (
-    <View style={{ backgroundColor: theme.backColor }}>
+    <View style={{backgroundColor: theme.backColor}}>
       {isLoading ? (
         <ActivityIndicator size="large" color="#DA3349" />
       ) : (
         <FlatList
           data={news.articles}
-          keyExtractor={(item, index) => "key" + index}
-          renderItem={({ item }) => <Card item={item} />}
+          keyExtractor={(item, index) => 'key' + index}
+          renderItem={({item}) => <Card item={item} />}
           nestedScrollEnabled={true}
         />
       )}
@@ -55,13 +55,13 @@ const NewsScreen = ({ route }) => {
 const styles = StyleSheet.create({
   midText: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 10,
     marginLeft: 20,
   },
   header: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 10,
     marginLeft: 20,
   },
