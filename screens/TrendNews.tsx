@@ -17,7 +17,7 @@ const TrendNews = (
     const fetchNews = async () => {
       try {
         console.log('Fetching trending news');
-        const response = await getNewsFromAPI('country=us');
+        const response = await getNewsFromAPI('sources=techcrunch');
         setNewsTech(response.data);
       } catch (error) {
         console.error(error);

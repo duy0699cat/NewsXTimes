@@ -21,7 +21,7 @@ import {CardProps} from '../types/screens';
 
 const {width, height} = Dimensions.get('window');
 
-const Card: React.FC<CardProps> = ({item /*, onPress8*/}) => {
+const Card: React.FC<CardProps> = ({item /*, onPress*/}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   //handleShare
@@ -40,7 +40,7 @@ const Card: React.FC<CardProps> = ({item /*, onPress8*/}) => {
       <TouchableNativeFeedback onPress={() => setModalVisible(!modalVisible)}>
         <View
           style={{
-            margin: 20,
+            margin: 10,
             borderRadius: 15,
             backgroundColor: theme.cardBackground,
             height: 290,

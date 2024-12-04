@@ -5,12 +5,10 @@ import Card from '../components/Card';
 import {getNewsFromAPI} from '../apis/News';
 import themeContext from '../config/themeContext';
 import {NewsResponse} from '../types/api';
-import {NewsScreenRouteProp} from '../types/screens';
+import {NewsScreenProps} from '../types/screens';
 
-
-
-const NewsScreen = ({route}: {route: NewsScreenRouteProp}) => {
-  const {country, category} = route.params;
+const NewsScreen: React.FC<NewsScreenProps> = ({route}) => {
+  const {country = 'us', category = 'general'} = route.params ?? {}; //adding null checks and default values
   const [isLoading, setLoading] = useState(true);
   const [news, setNews] = useState<NewsResponse | null>(null);
   const theme = useContext(themeContext);
