@@ -125,7 +125,7 @@ const Card: React.FC<CardProps> = ({item /*, onPress*/}) => {
             />
             <Button title="Share" onPress={handleShare} color={'#DA3349'} />
           </View>
-          <WebView source={{uri: item.url}} />
+          <WebView source={{uri: item.url}} />{/* modal content */}
         </View>
       </Modal>
     </View>
